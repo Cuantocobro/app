@@ -155,12 +155,12 @@ select:focus, input:focus {
     overflow: auto !important;
 }
 .table-scales th {
+.table-scales th {
     background-color: #f1f5f9 !important; /* Encabezado de tabla más marcado */
     color: #1e293b !important;
 }
-        
 
-                *, *::before, *::after {
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
@@ -172,7 +172,130 @@ select:focus, input:focus {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-font-smoothing: antialiased;
         }
+
+        /* ========================================================= */
+        /* NÚCLEO CORE: SISTEMA DE PANTALLAS (HOME VS CALCULADORA)  */
+        /* ========================================================= */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ========================================================= */
+        /* DISEÑO DE LA NUEVA HOME PREMIUM (ESTILO DATASUELDO)      */
+        /* ========================================================= */
+        #pantalla-home {
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .home-header {
+            text-align: center;
+            margin: 30px 0 25px 0;
+        }
+
+        .home-logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            letter-spacing: -1px;
+        }
+
+        .home-logo span {
+            color: #38bdf8; /* Detalle celeste premium */
+        }
+
+        .home-subtitle {
+            font-size: 15px;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Buscador */
+        .search-container {
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100% !important;
+            padding: 14px 16px !important;
+            font-size: 15px;
+            border-radius: 14px !important;
+            border: 1px solid #cbd5e1 !important;
+            background-color: #ffffff !important;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02) !important;
+        }
+
+        /* Grilla de Tarjetas (Idéntica a la imagen de referencia) */
+        .rubros-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .rubro-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .rubro-card:active {
+            transform: scale(0.97);
+        }
+
+        .rubro-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .rubro-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+            letter-spacing: -0.2px;
+            text-transform: uppercase;
+        }
+
+        .rubro-status {
+            font-size: 11px;
+            font-weight: 600;
+            color: #10b981; /* Verde activo */
+            margin-top: 6px;
+        }
+
+        .rubro-status.prox {
+            color: #94a3b8; /* Gris proximamente */
+        }
+
+        /* Botón Volver Estético */
+        .btn-volver {
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+        }
     </style>
+
 </head>
 <body>
 
