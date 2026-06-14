@@ -1136,9 +1136,15 @@ select:focus, input:focus {
             .then(d => { 
                 if (d && d.venta) { 
                     COTI_DOLAR = parseFloat(d.venta); 
-                    // Aplicamos Math.round para eliminar los decimales y mostrar números enteros
-                    document.getElementById('valCompra').innerHTML = '$ ' + Math.round(parseFloat(d.compra)); 
-                    document.getElementById('valVenta').innerHTML = '$ ' + Math.round(COTI_DOLAR); 
+                    
+                    // Buscamos los elementos en el HTML
+                    var elCompra = document.getElementById('valCompra');
+                    var elVenta = document.getElementById('valVenta');
+                    
+                    // Solo asignamos el valor si realmente existen en la página
+                    if (elCompra) elCompra.innerHTML = '$ ' + Math.round(parseFloat(d.compra)); 
+                    if (elVenta) elVenta.innerHTML = '$ ' + Math.round(COTI_DOLAR); 
+                    
                     calcularSueldoCompleto(); 
                     calcularConversion();
                 } 
@@ -1150,9 +1156,15 @@ select:focus, input:focus {
             .then(d => { 
                 if (d && d.venta) { 
                     COTI_REAL = parseFloat(d.venta); 
-                    // Aplicamos Math.round también para las cotizaciones del Real
-                    document.getElementById('valRealCompra').innerHTML = '$ ' + Math.round(parseFloat(d.compra)); 
-                    document.getElementById('valRealVenta').innerHTML = '$ ' + Math.round(COTI_REAL); 
+                    
+                    // Buscamos los elementos del Real en el HTML
+                    var elRealCompra = document.getElementById('valRealCompra');
+                    var elRealVenta = document.getElementById('valRealVenta');
+                    
+                    // Solo asignamos el valor si existen
+                    if (elRealCompra) elRealCompra.innerHTML = '$ ' + Math.round(parseFloat(d.compra)); 
+                    if (elRealVenta) elRealVenta.innerHTML = '$ ' + Math.round(COTI_REAL); 
+                    
                     calcularConversion();
                 } 
             }).catch(err => console.error("Error obteniendo real:", err));
