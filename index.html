@@ -597,7 +597,58 @@ select:focus, input:focus {
 </head>
 <body>
 
-<div class="ticker-dolar" id="tickerDolar">
+<div id="pantalla-inicio">
+    <div class="header-top">
+        <h2>CuantoCobro.com.ar</h2>
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="encabezado-inicio">
+        <h1>Encuentra tu Referencia<br>Salarial en Argentina</h1>
+        <p>Fácil, Rápido y Siempre Actualizado.</p>
+    </div>
+
+    <div class="grilla-rubros">
+        <button class="tarjeta-rubro" onclick="abrirModulo('seguridad')">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Seguridad<br>Privada</span>
+        </button>
+        <button class="tarjeta-rubro proximamente" onclick="mostrarProximamente()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Comercio y<br>Servicios</span>
+        </button>
+        <button class="tarjeta-rubro proximamente" onclick="mostrarProximamente()">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Gastronomía</span>
+        </button>
+        <button class="tarjeta-rubro proximamente" onclick="mostrarProximamente()">
+            <i class="fa-solid fa-helmet-safety"></i>
+            <span>Construcción</span>
+        </button>
+        <button class="tarjeta-rubro proximamente" onclick="mostrarProximamente()">
+            <i class="fa-solid fa-briefcase"></i>
+            <span>Administración</span>
+        </button>
+        <button class="tarjeta-rubro proximamente" onclick="mostrarProximamente()">
+            <i class="fa-solid fa-truck"></i>
+            <span>Transporte</span>
+        </button>
+    </div>
+
+    <div class="lo-mas-buscado">
+        <h3>Lo más buscado</h3>
+        <div class="caja-buscado"></div>
+    </div>
+    
+    <div class="footer-inicio">
+        Desarrollado para trabajadores. Datos actualizados mensualmente.
+    </div>
+</div>
+
+<div id="contenedor-app" style="display: none;">
+
+
+    <div class="ticker-dolar" id="tickerDolar">
     Dólar Oficial BNA — Venta: <span id="valVenta">...</span> | Compra: <span id="valCompra">...</span>
     <br>
     Real BNA — Venta: <span id="valRealVenta" class="real-color">...</span> | Compra: <span id="valRealCompra" class="real-color">...</span>
@@ -1231,6 +1282,37 @@ select:focus, input:focus {
         cambiarTablaInformativa('upsra');
         obtenerCotizacionesEnVivo();
     };
+
+<div style="text-align: center; margin: 30px 0 50px 0;">
+        <button onclick="volverInicio()" style="background: #ffffff; border: 1px solid #cbd5e1; padding: 12px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; color: #0f172a; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <i class="fa-solid fa-arrow-left"></i> Volver al Inicio
+        </button>
+    </div>
+</div> ```
+
+### Paso 5: Darle vida a los botones (Javascript)
+Finalmente, necesitamos que los botones hagan caso al hacer clic.
+Baja un poco más, dentro de tu etiqueta `<script>`, busca donde declaras las primeras variables (por ejemplo, debajo de `var miGraficoInstancia = null;`) y pega estas tres funcioncitas que controlan qué se muestra en la pantalla:
+
+```javascript
+    function abrirModulo(rubro) {
+        if (rubro === 'seguridad') {
+            document.getElementById('pantalla-inicio').style.display = 'none';
+            document.getElementById('contenedor-app').style.display = 'block';
+            window.scrollTo(0, 0); // Sube la pantalla arriba de todo
+        }
+    }
+
+    function mostrarProximamente() {
+        alert("¡Próximamente! Estamos trabajando para agregar las escalas salariales de este rubro.");
+    }
+
+    function volverInicio() {
+        document.getElementById('contenedor-app').style.display = 'none';
+        document.getElementById('pantalla-inicio').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
 </script>
 </body>
 </html>
