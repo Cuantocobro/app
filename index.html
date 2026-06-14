@@ -3,34 +3,51 @@
 <head>
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Buscamos todos los campos donde el usuario escribe números en la página
+    // Buscamos el input del monto a convertir
+    // Intentamos encontrarlo por placeholders comunes si no tiene ID único
     const inputs = document.querySelectorAll("input");
     
     inputs.forEach(input => {
-        // Escuchamos cuando el usuario escribe
-        input.addEventListener("input", function(e) {
-            // Si el campo es del conversor (buscando por su función o diseño)
-            let esConversor = input.id.includes("moneda") || input.id.includes("conversor") || (input.placeholder && input.placeholder.includes("50.000"));
+        // Identificamos si es el casillero del conversor
+        let esConversor = input.placeholder && (input.placeholder.includes("Monto") || input.placeholder.includes("000")) || input.id.includes("monto") || input.id.includes("conversor");
+        
+        if (esConversor) {
+            // PASO 1: Lo cambiamos a tipo texto para que permita dibujar los puntos de miles libremente
+            input.type = "text";
+            input.inputMode = "numeric"; // Esto hace que en el celu se siga abriendo el teclado numérico
             
-            if (esConversor) {
-                // 1. Limpiamos el texto dejando solo números puros
+            // PASO 2: Controlamos lo que escribe el usuario
+            input.addEventListener("input", function(e) {
+                // Quitamos todo lo que no sea número
                 let valorLimpio = e.target.value.replace(/\D/g, "");
                 
                 if (valorLimpio === "") {
                     e.target.value = "";
+                    // Si tenías una función que calcula, la reseteamos en 0
+                    if (typeof calcularConversion === "function") calcularConversion(0);
+                    if (typeof actualizarConversor === "function") actualizarConversor(0);
                     return;
                 }
                 
-                // 2. Lo transformamos a número entero
                 let numero = parseInt(valorLimpio, 10);
                 
-                // 3. Le aplicamos el formato de miles infinito estilo Argentina (. para miles)
+                // Dibujamos el número con puntos de miles perfectos (Estilo Argentina)
                 e.target.value = numero.toLocaleString("es-AR");
-            }
-        });
+                
+                // PASO 3: Le pasamos el número limpio a las funciones de tu código para que calculen el dólar/real
+                // Probamos con los nombres de funciones más comunes que suelen usarse:
+                if (typeof calcularConversion === "function") calcularConversion(numero);
+                if (typeof actualizarConversor === "function") actualizarConversor(numero);
+                if (typeof convertirMoneda === "function") convertirMoneda(numero);
+                
+                // Desparamos el evento nativo por si tu código viejo usaba un 'change' o 'input' directo
+                input.setAttribute('data-valor-puro', numero);
+            });
+        }
     });
 });
 </script>
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
