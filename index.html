@@ -1,6 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Buscamos todos los campos donde el usuario escribe números en la página
+    const inputs = document.querySelectorAll("input");
+    
+    inputs.forEach(input => {
+        // Escuchamos cuando el usuario escribe
+        input.addEventListener("input", function(e) {
+            // Si el campo es del conversor (buscando por su función o diseño)
+            let esConversor = input.id.includes("moneda") || input.id.includes("conversor") || (input.placeholder && input.placeholder.includes("50.000"));
+            
+            if (esConversor) {
+                // 1. Limpiamos el texto dejando solo números puros
+                let valorLimpio = e.target.value.replace(/\D/g, "");
+                
+                if (valorLimpio === "") {
+                    e.target.value = "";
+                    return;
+                }
+                
+                // 2. Lo transformamos a número entero
+                let numero = parseInt(valorLimpio, 10);
+                
+                // 3. Le aplicamos el formato de miles infinito estilo Argentina (. para miles)
+                e.target.value = numero.toLocaleString("es-AR");
+            }
+        });
+    });
+});
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunidad de Seguridad Privada — Simuladores y Guías</title>
